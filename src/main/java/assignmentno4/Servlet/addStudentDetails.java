@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import assignmentno3.beans.Student;
-import assignmentno3.beans.StudentValidator;
+import assignmentno4.beans.Student;
+import assignmentno4.beans.StudentValidator;
+
+
 
 /**
  * Servlet implementation class addStudentDetails
@@ -57,7 +59,7 @@ public class addStudentDetails extends HttpServlet {
 		 else if(percentage>=75) {
 			 grade = "A+ grade";
 		 }
-		 Student s1 = new Student(seatNo, studentName, phyMarks, cheMarks, mathsMarks, percentage, grade);
+		Student s1 = new Student(seatNo, studentName, phyMarks, cheMarks, mathsMarks, percentage, grade);
 		 boolean valid = StudentValidator.isValid(s1);
 		 
 		 String htmlResponse; 

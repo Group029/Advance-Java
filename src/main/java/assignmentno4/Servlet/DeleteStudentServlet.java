@@ -9,14 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import assignmentno4.beans.Student;
 import assignmentno4.beans.StudentValidator;
 
 /**
- * Servlet implementation class updatedDataServlet
+ * Servlet implementation class DeleteStudentServlet
  */
-@WebServlet(name="updatedDataServlet",urlPatterns="/jsp/updatedDataServlet")
-public class updatedDataServlet extends HttpServlet {
+@WebServlet(name="DeleteStudentServlet", urlPatterns="/jsp/DeleteStudentServlet")
+public class DeleteStudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -32,44 +31,22 @@ public class updatedDataServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String seatNo = request.getParameter("seatNo");
-		String studentName = request.getParameter("studentName");
-		int phyMarks = Integer.parseInt(request.getParameter("Physics"));
-		int cheMarks = Integer.parseInt(request.getParameter("Chemistry"));
-		int mathsMarks = Integer.parseInt(request.getParameter("Maths"));
-		float percentage = ((phyMarks+cheMarks+mathsMarks)/3);
-		String grade = null;
-		 if(percentage<35) {
-			 grade = "fail";
-		 }
-		 else if(percentage>=35 && percentage<=50) {
-			 grade = "C grade";
-		 }
-		 else if(percentage>50 && percentage<=65) {
-			 grade = "B grade";
-		 }
-		 else if(percentage>65 && percentage<=74) {
-			 grade = "A grade";
-		 }
-		 else if(percentage>=75) {
-			 grade = "A+ grade";
-		 }
 		
-		 Student s1 = new Student(seatNo, studentName, phyMarks, cheMarks, mathsMarks, percentage, grade);
-		 boolean valid = StudentValidator.updateStudentDetails(s1);
-		 
+		boolean valid = StudentValidator.deleteOne(seatNo);
 		 String htmlResponse; 
 			if(valid) {
 				htmlResponse = 
-				"<h1 style='color:white;background-color:green'>Update sucessful !!</h1>";
+				"<h1 style='color:white;background-color:green'>Deleted sucessful !!</h1>" +seatNo;
 			}
 			else
 			{
 				htmlResponse = 
-							"<h1 style='color:white;background-color:red'>Failed to upDate</h1>";
+							"<h1 style='color:white;background-color:red'>Failed to Delete</h1>";
 			}
 			
 			out.println(htmlResponse);
-	}
+		}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -80,4 +57,3 @@ public class updatedDataServlet extends HttpServlet {
 	}
 
 }
-  
